@@ -1,0 +1,7 @@
+http://127.0.0.1:8000/login
+User Name : user@gmail.com
+Password: password
+
+http://127.0.0.1:8000/admin/login
+User Name : admin@gmail.com
+Password: password
