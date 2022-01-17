@@ -60,7 +60,7 @@
 
                                                 <a href="{{ route('brand.edit', $brandinfo->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{route('brand.delete',$brandinfo->id)}}" class="btn btn-danger">Delete</a>
+                                                <a href="{{route('brand.delete',$brandinfo->id)}}"  class="btn btn-danger delete">Delete</a>
 
                                             </td>
 

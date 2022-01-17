@@ -112,7 +112,11 @@ class brandContrller extends Controller
 
 
     public function BrandDelete($id){
+        $brandinfo=  Brand::find($id);
+        $ImgPath =   $brandinfo->brand_image;
+
         Brand::where('id', '=', $id)->delete();
-        return redirect('brand/view')->with(['message'=>'Brand Deleted successfully', 'type'=>'error']);
+        unlink($ImgPath);
+        return redirect('brand/view');
     }
 }
