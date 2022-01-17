@@ -7,7 +7,7 @@ use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\frontend\userController;
 
 use App\Http\Controllers\brandContrller;
-
+use App\Http\Controllers\backend\catagoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,4 +80,14 @@ Route::prefix('brand')->group(function(){
     Route::get('edit/{id}', [brandContrller::class, 'BrandEdit'])->name('brand.edit');
     Route::post('update', [brandContrller::class, 'BrandUpdate'])->name('brand.update');
     Route::get('delete/{id}', [brandContrller::class, 'BrandDelete'])->name('brand.delete');
+});
+
+
+
+Route::prefix('catagory')->group(function(){
+    Route::get('view', [catagoryController::class, 'ViewAllCata'])->name('catagory.view');
+    Route::post('store', [catagoryController::class, 'SotreCata'])->name('catagory.store');
+    Route::get('edit/{id}', [catagoryController::class, 'EditCata'])->name('catagory.edit');
+    Route::post('update', [catagoryController::class, 'UpdateCata'])->name('brand.update');
+    Route::get('delete/{id}', [catagoryController::class, 'DeleteCata'])->name('catagory.delete');
 });

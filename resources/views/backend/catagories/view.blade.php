@@ -1,6 +1,6 @@
 @extends('admin.admin_master')
 
-@section('title', 'Brand View')
+@section('title', 'Catagory View')
 
 @section('content')
 
@@ -12,13 +12,11 @@
 
 
 
-
-
             <div class="col-8">
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">All Brands</h3>
+                        <h3 class="box-title">All Categories</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -26,26 +24,26 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Brand En</th>
-                                        <th>Brand Hin</th>
-                                        <th>Image</th>
+                                        <th>Category English</th>
+                                        <th>Category Hindi</th>
+                                        <th>Icon</th>
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($brandinfo as $brandinfo)
+                                    @foreach ($cataInfo as $cataInfo)
                                         <tr>
-                                            <td>{{ $brandinfo->brand_name_en }}</td>
-                                            <td>{{ $brandinfo->brand_name_hin }}</td>
-                                            <td><img style="width: 70px; height:70px"
-                                                    src="{{ asset($brandinfo->brand_image) }}" alt=""></td>
+                                            <td>{{ $cataInfo->catagory_name_en }}</td>
+                                            <td>{{ $cataInfo->catagory_name_hin }}</td>
+                                            <td>
+                                                <i class="{{$cataInfo->catagory_icon}}"></i>
                                             <td>
 
-                                                <a href="{{ route('brand.edit', $brandinfo->id) }}"
+                                                <a href="{{ route('catagory.edit', $cataInfo->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{route('brand.delete',$brandinfo->id)}}"  class="btn btn-danger delete">Delete</a>
+                                                <a href="{{route('catagory.delete',$cataInfo->id)}}"  class="btn btn-danger delete">Delete</a>
 
                                             </td>
 
@@ -69,20 +67,20 @@
             <div class="col-md-4">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add New Brand</h3>
+                        <h3 class="box-title">Add New Category</h3>
                     </div>
                     <!-- /.box-header -->
 
 
                     <div class="box-body">
-                        <form action="{{ route('brand.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('catagory.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <h5>Brand Name English <span class="text-danger">*</span></h2>
-                                    <input type="text" name="brand_name_en" class="form-control"
-                                        value="{{ old('brand_name_en') }}">
+                                <h5>Category Name English <span class="text-danger">*</span></h2>
+                                    <input type="text" name="catagory_name_en" class="form-control"
+                                        value="{{ old('catagory_name_en') }}">
 
-                                    @error('brand_name_en')
+                                    @error('catagory_name_en')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                             </div>
@@ -90,10 +88,10 @@
 
                             <div class="form-group">
                                 <h5>Brand Name hindi<span class="text-danger">*</span> </h5>
-                                <input type="text" name="brand_name_hin" class="form-control"
-                                    value="{{ old('brand_name_hin') }}">
+                                <input type="text" name="catagory_name_hin" class="form-control"
+                                    value="{{ old('catagory_name_hin') }}">
 
-                                @error('brand_name_hin')
+                                @error('catagory_name_hin')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
 
@@ -101,19 +99,19 @@
                             </div>
 
                             <div class="form-group">
-                                <h5>Brand Image <span class="text-danger">*</span> </h5>
-                                <input type="file" name="brand_image" class="form-control" id="brand_image" onchange="previewBrandImg()">
-                                <span>For better image size should be 300*300 px</span> <br>
+                                <h5>Category Icon <span class="text-danger">*</span> </h5>
+                                <input type="text" name="catagory_icon" class="form-control" id="catagory_image">
+                                <span>Please add icon as like (fa fa facebook)</span>
 
-                                @error('brand_image')
+                                @error('catagory_icon')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
 
                             </div>
 
-                            <div class="form-group d-none" id="imgDev">
+                            <div class="form-group d-none" id="CataimgDev">
                                 <div class="controls">
-                                    <img style="width: 300px; height:300px" id="brandUpImg">
+                                    <img style="width: 300px; height:300px" id="CataUpImg">
                                 </div>
                             </div>
 
@@ -137,12 +135,6 @@
     </section>
     <!-- /.content -->
 
-<script>
-     function previewBrandImg() {
-        $(imgDev).removeClass('d-none');
 
-        brandUpImg.src = URL.createObjectURL(event.target.files[0]);
-        }
-</script>
 
 @endsection
