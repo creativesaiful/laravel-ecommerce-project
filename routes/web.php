@@ -6,6 +6,8 @@ use App\Http\Controllers\backend\AdminProfileController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\frontend\userController;
 
+use App\Http\Controllers\brandContrller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +31,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('admin.dashboard');
 
 
 
@@ -68,3 +70,14 @@ Route::get('/user/change/password', [userController::class, 'userChangePassword'
 
 
 Route::post('/user/update/password', [userController::class, 'userUpdatePassword'])->name('user.update_password');
+
+
+// Brands Related all Route
+
+Route::prefix('brand')->group(function(){
+    Route::get('view', [brandContrller::class, 'ViewAllBrand'])->name('brand.view');
+    Route::post('store', [brandContrller::class, 'BrandSotre'])->name('brand.store');
+    Route::get('edit/{id}', [brandContrller::class, 'BrandEdit'])->name('brand.edit');
+    Route::post('update', [brandContrller::class, 'BrandUpdate'])->name('brand.update');
+    Route::get('delete/{id}', [brandContrller::class, 'BrandDelete'])->name('brand.delete');
+});

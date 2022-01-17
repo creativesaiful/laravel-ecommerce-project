@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +20,9 @@
 
 
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -41,9 +40,15 @@
         @include('admin.body.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <div class="container-full">
 
-            @yield('content')
+                <!-- Main content -->
+                <section class="content">
 
+                    @yield('content')
+
+                </section>
+            </div>
         </div>
         <!-- /.content-wrapper -->
 
@@ -67,6 +72,11 @@
     <script src="{{ asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
 
+
+    <script src="{{asset('assets/vendor_components/datatable/datatables.min.js')}}"></script>
+	<script src="{{asset('backend/js/pages/data-table.js')}}"></script>
+
+
     <!-- Sunny Admin App -->
     <script src="{{ asset('backend/js/template.js') }}"></script>
     <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
@@ -76,30 +86,29 @@
 
 
 
-  <script>
-   @if (Session::has('message'))
+    <script>
+        @if (Session::has('message'))
 
-   var type =  ("{{Session::get('type')}}");
+            var type = ("{{ Session::get('type') }}");
 
-   var message =  ("{{Session::get('message')}}");
-   switch (type) {
-	case 'success':
-    toastr.success(message);
-		break;
-	case 'warning':
-    toastr.warning(message);
-		break;
-	case 'mootools':
-	toastr.error(message);
-		break;
-	case 'danger':
-    toastr.danger(message);
-		break;
-   }
+            var message = ("{{ Session::get('message') }}");
+            switch (type) {
+            case 'success':
+            toastr.success(message);
+            break;
+            case 'warning':
+            toastr.warning(message);
+            break;
+            case 'error':
+            toastr.error(message);
+            break;
+            case 'info':
+            toastr.info(message);
+            break;
+            }
 
- @endif
-
-</script>
+        @endif
+    </script>
 
 
 
