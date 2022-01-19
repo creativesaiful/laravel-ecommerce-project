@@ -49,13 +49,28 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i data-feather="briefcase"></i> <span>Catagory</span>
+                    <i data-feather="briefcase"></i> <span>Category</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('catagory.view')}}"><i class="ti-more"></i>All Catagories</a></li>
+                    <li><a href="{{route('catagory.view')}}"><i class="ti-more"></i>Categories</a></li>
+
+
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="briefcase"></i> <span>Sub Category</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('subcata.view')}}"><i class="ti-more"></i>Sub Categories</a></li>
+
 
                 </ul>
             </li>

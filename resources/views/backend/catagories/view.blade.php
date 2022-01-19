@@ -87,7 +87,7 @@
 
 
                             <div class="form-group">
-                                <h5>Brand Name hindi<span class="text-danger">*</span> </h5>
+                                <h5>Catagory Name hindi<span class="text-danger">*</span> </h5>
                                 <input type="text" name="catagory_name_hin" class="form-control"
                                     value="{{ old('catagory_name_hin') }}">
 
@@ -109,11 +109,7 @@
 
                             </div>
 
-                            <div class="form-group d-none" id="CataimgDev">
-                                <div class="controls">
-                                    <img style="width: 300px; height:300px" id="CataUpImg">
-                                </div>
-                            </div>
+
 
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Add Brand">

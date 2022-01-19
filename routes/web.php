@@ -8,6 +8,9 @@ use App\Http\Controllers\frontend\userController;
 
 use App\Http\Controllers\brandContrller;
 use App\Http\Controllers\backend\catagoryController;
+use App\Http\Controllers\backend\subCataController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,12 +85,22 @@ Route::prefix('brand')->group(function(){
     Route::get('delete/{id}', [brandContrller::class, 'BrandDelete'])->name('brand.delete');
 });
 
-
+//catagory route
 
 Route::prefix('catagory')->group(function(){
     Route::get('view', [catagoryController::class, 'ViewAllCata'])->name('catagory.view');
     Route::post('store', [catagoryController::class, 'SotreCata'])->name('catagory.store');
     Route::get('edit/{id}', [catagoryController::class, 'EditCata'])->name('catagory.edit');
-    Route::post('update', [catagoryController::class, 'UpdateCata'])->name('brand.update');
+    Route::post('update', [catagoryController::class, 'UpdateCata'])->name('catagory.update');
     Route::get('delete/{id}', [catagoryController::class, 'DeleteCata'])->name('catagory.delete');
+});
+
+//Sub catagory Route
+
+Route::prefix('subcata')->group(function(){
+    Route::get('view', [subCataController::class, 'ViewAllSubcata'])->name('subcata.view');
+    Route::post('store', [subCataController::class, 'SotreSubcata'])->name('subcata.store');
+    Route::get('edit/{id}', [subCataController::class, 'EditSubcata'])->name('subcata.edit');
+    Route::post('update', [subCataController::class, 'UpdateSubcata'])->name('subcata.update');
+    Route::get('delete/{id}', [subCataController::class, 'DeleteSubcata'])->name('subcata.delete');
 });

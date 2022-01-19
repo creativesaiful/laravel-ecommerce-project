@@ -57,12 +57,42 @@ class catagoryController extends Controller
 
     }//Method End
 
-    public function DeleteCata($id){
-        $CataInfo=  Catagory::find($id);
-        $ImgPath =   $CataInfo->catagory_icon;
+    public function EditCata($id){
+       $cataInfo =  Catagory::find($id);
+       return view('backend.catagories.edit', ['cataInfo'=> $cataInfo]);
+    }//Method End
 
-        Catagory::where('id', '=', $id)->delete();
-        unlink($ImgPath);
-        return back();
+
+
+    public function UpdateCata(Request $request){
+        $request->validate([
+            'catagory_name_en'=>'required',
+            'catagory_name_hin'=>'required',
+            'catagory_icon'=>'required',
+        ]);
+
+        $result =  Catagory::where('id', $request->id )->update([
+            'catagory_name_en'=>$request->catagory_name_en,
+            'catagory_name_hin'=>$request->catagory_name_hin,
+            'catagory_slug_en'=>strtolower(str_replace(' ', '-', $request->catagory_name_en)),
+            'catagory_slug_hin'=>strtolower(str_replace(' ', '-', $request->catagory_name_hin)),
+            'catagory_icon'=> $request->catagory_icon,
+        ]);
+
+        $success = [
+            'type' => 'success',
+            'message'=>'Catagory updated successfully',
+        ];
+
+        return redirect()->route('catagory.view')->with($success);
+
     }
+
+    public function DeleteCata($id){
+
+
+        Catagory::destroy($id);
+
+        return back();
+    }//Method End
 }
