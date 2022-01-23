@@ -9,7 +9,7 @@ use App\Http\Controllers\frontend\userController;
 use App\Http\Controllers\brandContrller;
 use App\Http\Controllers\backend\catagoryController;
 use App\Http\Controllers\backend\subCataController;
-
+use App\Http\Controllers\backend\subsubcateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,4 +103,16 @@ Route::prefix('subcata')->group(function(){
     Route::get('edit/{id}', [subCataController::class, 'EditSubcata'])->name('subcata.edit');
     Route::post('update', [subCataController::class, 'UpdateSubcata'])->name('subcata.update');
     Route::get('delete/{id}', [subCataController::class, 'DeleteSubcata'])->name('subcata.delete');
+});
+
+//Sub sub category
+Route::prefix('subsubcata')->group(function(){
+    Route::get('view', [subsubcateController::class, 'ViewAllSubsubcate'])->name('subsubcata.view');
+    Route::post('store', [subsubcateController::class, 'SotreSubsubcate'])->name('subsubcata.store');
+    Route::get('edit/{id}', [subsubcateController::class, 'EditSubsubcate'])->name('subsubcata.edit');
+    Route::post('update', [subsubcateController::class, 'UpdateSubsubcate'])->name('subsubcata.update');
+    Route::get('delete/{id}', [subsubcateController::class, 'DeleteSubsubcate'])->name('subsubcata.delete');
+
+    //ajax
+    Route::get('ajax/{cate_id}', [subsubcateController::class, 'SubcateAjax'])->name('subcata.ajax');
 });

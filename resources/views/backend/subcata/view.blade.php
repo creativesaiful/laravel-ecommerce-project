@@ -36,7 +36,7 @@
 
                                     @foreach ($subcataInfo as $subcataInfo)
                                         <tr>
-                                            <td>{{ $subcataInfo->category_id }}</td>
+                                            <td>{{ $subcataInfo['category']['catagory_name_en'] }}</td>
                                             <td>{{ $subcataInfo->subcata_name_en }}</td>
                                             <td>{{ $subcataInfo->subcata_name_hin }}</td>
 
@@ -126,7 +126,7 @@
 
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Add Brand">
+                                <input type="submit" class="btn btn-primary" value="Add">
                             </div>
 
 

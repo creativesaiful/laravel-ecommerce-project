@@ -11,10 +11,13 @@ class Subcata extends Model
 
     protected $fillable = [
         'category_id',
-
         'subcata_name_en',
         'subcata_name_hin',
         'subcata_slug_en',
         'subcata_slug_hin',
     ];
+
+    public function category(){
+        return $this->belongsTo(Catagory::class, 'category_id', 'id');
+    }
 }

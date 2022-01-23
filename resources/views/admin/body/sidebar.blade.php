@@ -55,7 +55,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('catagory.view')}}"><i class="ti-more"></i>Categories</a></li>
+                    <li class="{{$route== 'catagory.view' ? 'active' : ''}}" ><a href="{{route('catagory.view')}}"><i class="ti-more"></i>Categories</a></li>
 
 
                 </ul>
@@ -69,10 +69,18 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('subcata.view')}}"><i class="ti-more"></i>Sub Categories</a></li>
+                    <li class="{{$route == 'subcata.view' ? 'active' : ''}}"><a href="{{route('subcata.view')}}"><i class="ti-more"></i>Sub Categories</a></li>
 
+
+                    <li class="{{$route == 'subsubcata.view' ? 'active' : ''}}" ><a href="{{route('subsubcata.view')}}"><i class="ti-more"></i>Sub Sub Categories</a></li>
 
                 </ul>
+
+
+
+
+
+
             </li>
 
             <li class="treeview">
