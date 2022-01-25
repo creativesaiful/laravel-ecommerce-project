@@ -72,17 +72,28 @@
     <script src="{{ asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
 
-
+{{-- Datable script  --}}
     <script src="{{ asset('assets/vendor_components/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+
+
+{{-- Input multiple Tags Script  --}}
+    <script src="{{asset('/assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>
+
+{{-- Ck Editor  --}}
+    <script src="{{asset('assets/vendor_components/ckeditor/ckeditor.js')}}"></script>
+
+
+    <script src="{{asset('backend/js/pages/editor.js')}}"></script>
+
+{{-- Toaster script  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
     <!-- Sunny Admin App -->
     <script src="{{ asset('backend/js/template.js') }}"></script>
     <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
 

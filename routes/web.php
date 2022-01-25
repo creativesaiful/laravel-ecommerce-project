@@ -10,7 +10,7 @@ use App\Http\Controllers\brandContrller;
 use App\Http\Controllers\backend\catagoryController;
 use App\Http\Controllers\backend\subCataController;
 use App\Http\Controllers\backend\subsubcateController;
-
+use App\Http\Controllers\backend\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,4 +115,23 @@ Route::prefix('subsubcata')->group(function(){
 
     //ajax
     Route::get('ajax/{cate_id}', [subsubcateController::class, 'SubcateAjax'])->name('subcata.ajax');
+});
+
+
+//Product Route
+
+Route::prefix('product')->group(function(){
+
+
+    route::get('create',[ProductController::class, 'ProductCreate'])->name('product.create');
+    route::post('store',[ProductController::class, 'ProductStore'])->name('product.store');
+    route::get('view',[ProductController::class, 'ProductView'])->name('product.view');
+
+
+    // Ajax sub Category
+    route::get('subcata/ajax/{cata_id}', [ProductController::class, 'cateToSubCate']);
+
+
+    // Ajax sub Sub Category
+    route::get('sub_sub_cata/ajax/{subcate_id}', [ProductController::class, 'subTosubSubCate']);
 });
