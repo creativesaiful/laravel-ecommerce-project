@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->integer('brand_id');
             $table->integer('category_id');
-            $table->integer('sub_categoroy_id');
+            $table->integer('sub_category_id');
             $table->integer('sub_sub_category_id');
 
             $table->string('product_name_en');
@@ -44,8 +44,8 @@ class CreateProductsTable extends Migration
             $table->string('short_description_en');
             $table->string('short_description_hin');
 
-            $table->string('long_description_en');
-            $table->string('long_description_hin');
+            $table->text('long_description_en');
+            $table->text('long_description_hin');
 
             $table->string('product_thumbnail');
 

@@ -356,7 +356,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
 
 
-                            <input type="text" name="selling_price" class="form-control" />
+                            <input type="text" name="selling_price" class="form-control" required />
 
 
                             @error('selling_price')
@@ -414,7 +414,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
 
                             <input type="file" name="product_thumbnail" class="form-control"
-                                onChange="mainThamUrl(this)" />
+                                onChange="mainThamUrl(this)" required />
 
                             <img src="" id="mainThmb" class="my-3">
 
@@ -564,11 +564,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
                             <div class="controls">
                                 <fieldset>
-                                    <input type="checkbox" id="checkbox_1" name="featured" value="y">
+                                    <input type="checkbox" id="checkbox_1" name="featured" value="1">
                                     <label for="checkbox_1"> Featured</label>
                                 </fieldset>
                                 <fieldset>
-                                    <input type="checkbox" id="checkbox_2" name="hot_deals" value="y">
+                                    <input type="checkbox" id="checkbox_2" name="hot_deals" value="1">
                                     <label for="checkbox_2">Hot Deals</label>
                                 </fieldset>
                             </div>
@@ -587,11 +587,11 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
                             <div class="controls">
                                 <fieldset>
-                                    <input type="checkbox" id="checkbox_3" name="special_offer" value="y">
+                                    <input type="checkbox" id="checkbox_3" name="special_offer" value="1">
                                     <label for="checkbox_3"> Special Offer</label>
                                 </fieldset>
                                 <fieldset>
-                                    <input type="checkbox" id="checkbox_4" name="special_deals" value="y">
+                                    <input type="checkbox" id="checkbox_4" name="special_deals" value="1">
                                     <label for="checkbox_4">Special Deals</label>
                                 </fieldset>
                             </div>

@@ -9,6 +9,10 @@ use App\Models\Catagory;
 use App\Models\Subcata;
 
 use App\Models\Subsubcate;
+use App\Models\Product;
+use Intervention\Image\Facades\Image;
+use App\Models\MultiImage;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -40,11 +44,92 @@ class ProductController extends Controller
 
 
     public function ProductStore(Request $request){
-        return $request;
+
+        $imagepath = $request->file('product_thumbnail');
+        $imgName = hexdec(uniqid()).'.'.$imagepath->getClientOriginalExtension();
+
+        Image::make($imagepath)->resize(917, 1000)->save('upload/products/thumbnail/'.$imgName);
+        $imgUrl = ('upload/products/thumbnail/'.$imgName);
+
+
+       $productId =  Product::insertGetId([
+            'brand_id'=>$request->brand_id,
+            'category_id'=>$request->category_id,
+            'sub_category_id'=>$request->sub_category_id,
+            'sub_sub_category_id'=>$request->sub_sub_category_id,
+            'product_name_en'=>$request->product_name_en,
+            'product_name_hin'=>$request->product_name_hin,
+            'product_slug_en'=>strtolower(str_replace(' ', '-', $request->product_name_en)),
+            'product_slug_hin'=>strtolower(str_replace(' ', '-', $request->product_slug_hin)),
+            'product_code'=>$request->product_code,
+            'product_qty'=>$request->product_qty,
+            'product_tags_en'=>$request->product_tags_en,
+            'product_tags_hin'=>$request->product_tags_hin,
+            'product_size_en'=>$request->product_size_en,
+            'product_size_hin'=>$request->product_size_hin,
+            'product_color_en'=>$request->product_color_en,
+            'product_color_hin'=>$request->product_color_hin,
+            'selling_price'=>$request->selling_price,
+            'discount_price'=>$request->discount_price,
+            'short_description_en'=>$request->short_description_en,
+            'short_description_hin'=>$request->short_description_hin,
+
+            'long_description_en'=>$request->long_description_en,
+            'long_description_hin'=>$request->long_description_hin,
+
+            'product_thumbnail'=>$imgUrl,//Have to work
+
+            'hot_deals'=>$request->hot_deals,
+            'featured'=>$request->featured,
+            'special_offer'=>$request->special_offer,
+            'special_deals'=>$request->special_deals,
+            'created_at'=>Carbon::now(),
+
+        ]);
+
+        $multi_images = $request->file('multi_images');
+
+        foreach($multi_images as $img){
+            $singleImg = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+
+            Image::make($img)->resize(917, 1000)->save('upload/products/multiImg/'.$singleImg);
+            $imageUrl = ('upload/products/multiImg/'.$imgName);
+
+            MultiImage::insert([
+                'product_id'=> $productId,
+                'image_path'=>$imageUrl,
+            ]);
+
+        }
+
+        $success = [
+            'type' => 'success',
+            'message'=>'Sub Category Added successfully',
+        ];
+
+
+        return redirect()->route('product.view')->with($success);
     }//End Method
+
+
 
 
     public function ProductView(){
-
+        $productInfo = Product::latest()->get();
+        return view('backend.products.product_view', ['productInfo'=>$productInfo]);
     }//End Method
+
+
+
+
+    public function ProductEdit($id){
+        return ($id.'Need to edit');
+    }//End Method
+
+
+
+
+    public function ProductDelete($id){
+        return ($id.'Need to delete');
+    }
 }
