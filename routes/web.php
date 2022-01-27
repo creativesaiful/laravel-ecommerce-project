@@ -125,8 +125,12 @@ Route::prefix('product')->group(function(){
 
     route::get('create',[ProductController::class, 'ProductCreate'])->name('product.create');
     route::post('store',[ProductController::class, 'ProductStore'])->name('product.store');
+
     route::get('view',[ProductController::class, 'ProductView'])->name('product.view');
+
     route::get('edit/{id}',[ProductController::class, 'ProductEdit'])->name('product.edit');
+    route::post('update/{id}',[ProductController::class, 'ProductUpdate'])->name('product.update');
+
     route::get('delete/{id}',[ProductController::class, 'ProductDelete'])->name('product.delete');
 
 
