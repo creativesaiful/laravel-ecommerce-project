@@ -430,6 +430,28 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                     </div>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="box-body py-2">
+                        <div class="form-group form-group-float">
+                            <label class="form-group-float-label text-light">Product Thumbnail<span
+                             class="text-danger">*</span> </label>
+                                <br>
+
+                             <img style="width: 100px; height:100px" src="{{url($pdt_info->product_thumbnail)}}" id="mainThmb" alt="">
+
+                            <input type="file" name="product_thumbnail" class="form-control"
+                                onChange="mainThamUrl(this)" />
+
+
+
+                            @error('product_thumbnail')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+                    </div>
+                </div>
+
 
 
 
@@ -556,13 +578,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                             <div class="controls">
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_1" name="featured"
-                                        value="{{ $pdt_info->featured }}"
+                                        value="1"
                                         {{ @$pdt_info->featured == 1 ? 'checked' : '' }}>
                                     <label for="checkbox_1"> Featured</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_2" name="hot_deals"
-                                        value="{{ $pdt_info->hot_deals }}"
+                                        value="1"
                                         {{ @$pdt_info->hot_deals == 1 ? 'checked' : '' }}>
                                     <label for="checkbox_2">Hot Deals</label>
                                 </fieldset>
@@ -583,13 +605,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                             <div class="controls">
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_3" name="special_offer"
-                                        value="{{ $pdt_info->special_offer }}"
+                                        value="1"
                                         {{ @$pdt_info->special_offer == 1 ? 'checked' : '' }}>
                                     <label for="checkbox_3"> Special Offer</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_4" name="special_deals"
-                                        value="{{ $pdt_info->special_deals }}"
+                                        value="1"
                                         {{ @$pdt_info->special_deals == 1 ? 'checked' : '' }}>
                                     <label for="checkbox_4">Special Deals</label>
                                 </fieldset>
@@ -631,7 +653,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         </div>
 
 
-        <form action="">
+        <form action="{{route('image.update')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
 
@@ -640,12 +662,12 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 @foreach ($multiImg as $key => $multiImg)
 
 
-                    <div class="col-md-4">
-                        <div class="card p-3" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ url($multiImg->image_path) }}" alt="Card image cap">
+                    <div class="col-md-3">
+                        <div class="card p-3">
+                            <img class="card-img-top" style="width: 250px" src="{{url($multiImg->image_path) }}" alt="Card image cap">
 
                             <div class="div">
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+                                <a href="{{route('image.remove',$multiImg->id )}}" class="btn btn-danger btn-sm delete"><i class="fa fa-remove"></i></a>
                             </div>
 
                             <div class="card-body">
@@ -655,7 +677,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                                     <label class="form-group-float-label text-light">Choose Image </label>
 
 
-                                    <input type="file" name="multiImg[{{ $multiImg->id }}]" class="form-control" />
+                                    <input type="file" name="multiImg[{{$multiImg->id}}]" class="form-control" />
 
 
 
@@ -672,7 +694,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
             </div>
 
-            <div class="form-group">
+            <div class="form-group my-5">
 
                 <input type="submit" value="Update Galary" class="btn btn-primary" />
 
@@ -682,6 +704,18 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
     </div>
 
 
+
+    <script>
+          function mainThamUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThmb').attr('src', e.target.result).width(100).height(100);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 
 
@@ -748,52 +782,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
     {{-- Image Preview --}}
 
-    <script>
-        function mainThamUrl(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#mainThmb').attr('src', e.target.result).width(80).height(80);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
 
-
-        $(document).ready(function() {
-            $('#multiImg').on('change', function() { //on file input change
-
-                $('#preview_img').empty();
-                if (window.File && window.FileReader && window.FileList && window
-                    .Blob) //check File API supported browser
-                {
-                    var data = $(this)[0].files; //this file data
-
-                    $.each(data, function(index, file) { //loop though each file
-
-
-
-                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
-                                .type)) { //check supported file type
-                            var fRead = new FileReader(); //new filereader
-                            fRead.onload = (function(file) { //trigger function on successful read
-                                return function(e) {
-                                    var img = $('<img/>').addClass('thumb').attr('src',
-                                            e.target.result).width(80)
-                                        .height(80); //create image element
-                                    $('#preview_img').append(
-                                        img); //append image to output element
-                                };
-                            })(file);
-                            fRead.readAsDataURL(file); //URL representing the file's data.
-                        }
-                    });
-
-                } else {
-                    alert("Your browser doesn't support File API!"); //if File API is absent
-                }
-            });
-        });
-    </script>
 
 @endsection

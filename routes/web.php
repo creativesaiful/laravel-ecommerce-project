@@ -131,6 +131,12 @@ Route::prefix('product')->group(function(){
     route::get('edit/{id}',[ProductController::class, 'ProductEdit'])->name('product.edit');
     route::post('update/{id}',[ProductController::class, 'ProductUpdate'])->name('product.update');
 
+    route::post('change/image/',[ProductController::class, 'ProductImgUpdate'])->name('image.update');
+    route::get('remove/image/{id}',[ProductController::class, 'ProductImgRemove'])->name('image.remove');
+
+    route::get('inactive/{id}',[ProductController::class, 'productInactive'])->name('product.inactive');
+    route::get('active/{id}',[ProductController::class, 'productActive'])->name('product.active');
+
     route::get('delete/{id}',[ProductController::class, 'ProductDelete'])->name('product.delete');
 
 
