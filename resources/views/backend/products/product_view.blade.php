@@ -81,10 +81,10 @@
 
                                                 @if ($productInfo->status==0)
                                                 <a href="{{ route('product.inactive', $productInfo->id) }}"
-                                                    class="btn btn-info" title="Incitve Product"><i class="fa fa-arrow-down"></i></a>
+                                                    class="btn btn-danger" title="Incitve Product"><i class="fa fa-arrow-down"></i></a>
                                                 @else
                                                 <a href="{{ route('product.active', $productInfo->id) }}"
-                                                    class="btn btn-info" title="Active Product"><i class="fa fa-arrow-up"></i></a>
+                                                    class="btn btn-success" title="Active Product"><i class="fa fa-arrow-up"></i></a>
                                                 @endif
 
                                             </td>

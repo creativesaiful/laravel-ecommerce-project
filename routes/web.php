@@ -11,6 +11,10 @@ use App\Http\Controllers\backend\catagoryController;
 use App\Http\Controllers\backend\subCataController;
 use App\Http\Controllers\backend\subsubcateController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\sliderController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,4 +150,16 @@ Route::prefix('product')->group(function(){
 
     // Ajax sub Sub Category
     route::get('sub_sub_cata/ajax/{subcate_id}', [ProductController::class, 'subTosubSubCate']);
+});
+
+
+Route::prefix('slider')->group(function(){
+    Route::get('view', [sliderController::class, 'SliderView' ])->name('slider.view');
+    Route::post('store', [sliderController::class, 'SliderStore' ])->name('slider.store');
+    Route::get('edit/{id}', [sliderController::class, 'SliderEdit' ])->name('slider.edit');
+    Route::post('update/{id}', [sliderController::class, 'SliderUpdate' ])->name('slider.update');
+    Route::get('delete/{id}', [sliderController::class, 'SliderDelete' ])->name('slider.delete');
+
+    Route::get('active/{id}', [sliderController::class, 'SlideActive' ])->name('slider.active');
+    Route::get('inactive/{id}', [sliderController::class, 'SlideInActive' ])->name('slider.inactive');
 });

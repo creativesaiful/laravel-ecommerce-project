@@ -26,7 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th>Catagory id</th>
-                                        <th>Sub Catagory id</th>
+                                        <th>Sub Catagory Name</th>
                                         <th>Sub Sub Category Name</th>
                                         <th>Sub Sub Category Hindi</th>
 
