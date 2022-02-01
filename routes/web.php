@@ -12,7 +12,7 @@ use App\Http\Controllers\backend\subCataController;
 use App\Http\Controllers\backend\subsubcateController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\sliderController;
-
+use App\Http\Controllers\frontend\LanguageController;
 
 
 /*
@@ -163,3 +163,10 @@ Route::prefix('slider')->group(function(){
     Route::get('active/{id}', [sliderController::class, 'SlideActive' ])->name('slider.active');
     Route::get('inactive/{id}', [sliderController::class, 'SlideInActive' ])->name('slider.inactive');
 });
+
+
+
+//FrontEnd Language Route
+Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
+
+Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
