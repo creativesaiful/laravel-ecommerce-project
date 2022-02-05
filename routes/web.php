@@ -58,25 +58,7 @@ Route::post('admin/store_profile',[AdminProfileController::class, 'storeAdminPro
 
 
 
-//FrontEnd Route
 
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/', [IndexController::class, 'index']);
-
-
-Route::get('/user/edit', [userController::class, 'getUserData'])->name('user.edit');
-
-
-Route::post('/user/update', [userController::class, 'userUpdate'])->name('user.update');
-
-
-Route::get('/user/change/password', [userController::class, 'userChangePassword'])->name('user.change_passwrod');
-
-
-Route::post('/user/update/password', [userController::class, 'userUpdatePassword'])->name('user.update_password');
 
 
 // Brands Related all Route
@@ -122,7 +104,7 @@ Route::prefix('subsubcata')->group(function(){
 });
 
 
-//Product Route
+//Product Route Backend
 
 Route::prefix('product')->group(function(){
 
@@ -166,7 +148,32 @@ Route::prefix('slider')->group(function(){
 
 
 
+//FrontEnd Route
+
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/', [IndexController::class, 'index']);
+
+
+Route::get('/user/edit', [userController::class, 'getUserData'])->name('user.edit');
+
+
+Route::post('/user/update', [userController::class, 'userUpdate'])->name('user.update');
+
+
+Route::get('/user/change/password', [userController::class, 'userChangePassword'])->name('user.change_passwrod');
+
+
+Route::post('/user/update/password', [userController::class, 'userUpdatePassword'])->name('user.update_password');
+
 //FrontEnd Language Route
 Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
 
 Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+//FrontEnd prduct details Route
+
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+
