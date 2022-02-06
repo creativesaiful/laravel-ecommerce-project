@@ -13,7 +13,7 @@ use App\Models\Slider;
 class IndexController extends Controller
 {
    public function index(){
-   $catagory =  Catagory::orderBy('catagory_name_en', 'ASC')->get();
+
    $cata =  Catagory::orderBy('catagory_name_en', 'ASC')->get();
    $allcata =  Catagory::orderBy('catagory_name_en', 'ASC')->get();
 
@@ -35,7 +35,7 @@ class IndexController extends Controller
     $skip_brand_product_0 = Product::where('brand_id', $skip_brand_0->id)->where('status', 0)->orderBy('id', 'desc')->limit(8)->get();
 
 
-       return view('frontend.index', compact('catagory', 'cata', 'sliders','products', 'allcata', 'features', 'hot_deals', 'special_offers', 'special_deals', 'skip_cate_0', 'skip_product_0', 'skip_cate_1', 'skip_product_1','skip_brand_0', 'skip_brand_product_0' ) );
+       return view('frontend.index', compact('cata', 'sliders','products', 'allcata', 'features', 'hot_deals', 'special_offers', 'special_deals', 'skip_cate_0', 'skip_product_0', 'skip_cate_1', 'skip_product_1','skip_brand_0', 'skip_brand_product_0' ) );
    }
 
 
@@ -45,6 +45,13 @@ class IndexController extends Controller
        $multiImgs = MultiImage::where('product_id', $id)->get();
        $hot_deals = Product::where('status', 0)->where('hot_deals', 1)->orderBy('id', 'desc')->limit(8)->get();
        return view("frontend.product.product_details", compact('product', 'multiImgs', 'hot_deals'));
+   }
+
+
+   public function TagwiseProduct($tag){
+    $products = Product::where('status', 0)->where('product_tags_en',$tag)->orWhere('product_tags_hin',$tag)->orderBy('id', 'desc')->paginate(6);
+
+    return view('frontend.product.tagwise_product', compact('products'));
    }
 
 
