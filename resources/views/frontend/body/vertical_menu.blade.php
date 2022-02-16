@@ -32,13 +32,17 @@
 
                                 @foreach ($sub_category as $sub_category)
                                     <div class="col-sm-12 col-md-3">
-                                        <h2 class="title">
-                                            @if (session()->get('language') == 'hindi')
-                                                {{ $sub_category->subcata_name_hin }}
-                                            @else
-                                                {{ $sub_category->subcata_name_en }}
-                                            @endif
-                                        </h2>
+
+                                        <a href="{{url('/product/subcategory/'.$sub_category->id.'/'.$sub_category->subcata_slug_en)}}">
+
+                                            <h2 class="title">
+                                                @if (session()->get('language') == 'hindi')
+                                                    {{ $sub_category->subcata_name_hin }}
+                                                @else
+                                                    {{ $sub_category->subcata_name_en }}
+                                                @endif
+                                            </h2>
+                                        </a>
 
 
 
@@ -51,7 +55,7 @@
 
                                         @foreach ($subsubcategory as $subsubcategory)
                                             <ul class="links list-unstyled">
-                                                <li><a href="#">
+                                                <li><a href="{{url('/product/subsubcategory/'. $subsubcategory->id.'/'.$subsubcategory->subsubcata_slug_en)}}">
                                                         @if (session()->get('language') == 'hindi')
                                                             {{ $subsubcategory->subsubcata_name_hin }}
                                                         @else

@@ -180,3 +180,11 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDeta
 //FrontEnd Tags details Route
 
 Route::get('/product/tag/{tag_text}', [IndexController::class, 'TagwiseProduct'])->name('tag.product');
+
+//FrontEnd Sub Catagory wise product Route
+
+Route::get('/product/subcategory/{sub_id}/{slug}', [IndexController::class, 'SubCateWiseProduct'])->name('subcategory.product');
+
+//FrontEnd Sub Sub Catagory wise product Route
+
+Route::get('/product/subsubcategory/{sub_sub_id}/{slug}', [IndexController::class, 'SubSubCateWiseProduct'])->name('sub.subcategory.product');

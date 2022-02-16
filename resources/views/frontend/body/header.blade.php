@@ -11,7 +11,9 @@
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
 
                         <li><a href="#"><i class="icon fa fa-user"></i>
-                                @if (session()->get('language') == 'hindi') मेरी प्रोफाइल @else My Account @endif
+                                @if (session()->get('language') == 'hindi')
+                                मेरी प्रोफाइल @else My Account
+                                @endif
                             </a></li>
 
 
@@ -50,7 +52,9 @@
 
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
                                 data-toggle="dropdown"><span class="value">
-                                    @if (session()->get('language') == 'hindi') भाषा: हिन्दी @else Language @endif
+                                    @if (session()->get('language') == 'hindi')
+                                    भाषा: हिन्दी @else Language
+                                    @endif
                                 </span><b class="caret"></b></a>
 
                             <ul class="dropdown-menu">
@@ -203,12 +207,13 @@
                                 @endphp
 
                                 @foreach ($category as $category)
-
-
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle" data-toggle="dropdown">
 
-                                            @if (session()->get('language') == 'hindi') {{ $category->catagory_name_hin }} @else {{ $category->catagory_name_en }} @endif
+                                            @if (session()->get('language') == 'hindi')
+                                            {{ $category->catagory_name_hin }} @else
+                                                {{ $category->catagory_name_en }}
+                                            @endif
 
 
                                         </a>
@@ -216,46 +221,45 @@
                                             <li>
                                                 <div class="yamm-content ">
                                                     <div class="row">
- @php
-          $subcategory = App\Models\Subcata::where('category_id', $category->id) ->orderBy('subcata_name_en', 'ASC')
-                                                                    ->get();
-                                                            @endphp
-  @foreach ($subcategory as $subcategory)
-                                                        <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                                        @php
+                                                            $subcategory = App\Models\Subcata::where('category_id', $category->id)
+                                                                ->orderBy('subcata_name_en', 'ASC')
+                                                                ->get();
+                                                        @endphp
+                                                        @foreach ($subcategory as $subcategory)
+                                                            <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
 
 
 
-
+                                                         <a href="{{url('/product/subcategory/'.$subcategory->id.'/'.$subcategory->subcata_slug_en)}}">
                                                                 <h2 class="title">
                                                                     @if (session()->get('language') == 'hindi')
-                                                                    {{ $subcategory->subcata_name_hin }}
+                                                                        {{ $subcategory->subcata_name_hin }}
                                                                     @else
-                                                                     {{ $subcategory->subcata_name_en }}
+                                                                        {{ $subcategory->subcata_name_en }}
                                                                     @endif
                                                                 </h2>
+                                                            </a>
+                                                                @php
+                                                                    $subsubcategory = App\Models\Subsubcate::where('sub_category_id', $subcategory->id)
+                                                                        ->orderBy('subsubcata_name_en', 'ASC')
+                                                                        ->get();
+                                                                @endphp
 
-                                                    @php
- $subsubcategory = App\Models\Subsubcate::where('sub_category_id', $subcategory->id) ->orderBy('subsubcata_name_en', 'ASC')
-                                                                    ->get();
-                                                    @endphp
+                                                                @foreach ($subsubcategory as $subsubcategory)
+                                                                    <ul class="links">
+                                                                        <li><a href="{{url('/product/subsubcategory/'. $subsubcategory->id.'/'.$subsubcategory->subsubcata_slug_en)}}">
+                                                                                @if (session()->get('language') == 'hindi')
+                                                                                    {{ $subsubcategory->subsubcata_name_hin }}
+                                                                                @else
+                                                                                    {{ $subsubcategory->subsubcata_name_en }}
+                                                                                @endif
 
-                                                    @foreach ($subsubcategory as $subsubcategory)
+                                                                            </a></li>
 
-
-                                                            <ul class="links">
-                                                                <li><a href="#">
-                                                                    @if (session()->get('language') == 'hindi')
-                                                                    {{ $subsubcategory->subsubcata_name_hin }}
-                                                                    @else
-                                                                     {{ $subsubcategory->subsubcata_name_en }}
-                                                                    @endif
-
-                                                                </a></li>
-
-                                                            </ul>
-                                                            @endforeach
-                                                        </div>
-
+                                                                    </ul>
+                                                                @endforeach
+                                                            </div>
                                                         @endforeach
                                                         <!-- /.col -->
 

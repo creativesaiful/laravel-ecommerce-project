@@ -42,9 +42,24 @@ class IndexController extends Controller
 
    public function ProductDetails($id, $slug){
        $product = Product::findOrFail($id);
+
+       $product_size_en = explode(',', $product->product_size_en);
+       $product_size_hin = explode(',', $product->product_size_hin);
+
+        $product_color_en = explode(',', $product->product_color_en);
+        $product_color_hin = explode(',', $product->product_color_hin);
+
+
+        $cate_id = $product->category_id;
+
+        $related_products = Product::where('category_id', $cate_id)->where('status', 0)->orderBy('id', 'desc')->limit(5)->get();
+
        $multiImgs = MultiImage::where('product_id', $id)->get();
        $hot_deals = Product::where('status', 0)->where('hot_deals', 1)->orderBy('id', 'desc')->limit(8)->get();
-       return view("frontend.product.product_details", compact('product', 'multiImgs', 'hot_deals'));
+
+
+
+       return view("frontend.product.product_details", compact('product', 'multiImgs', 'hot_deals', 'product_size_en', 'product_size_hin', 'product_color_en', 'product_color_hin', 'related_products'));
    }
 
 
@@ -52,7 +67,22 @@ class IndexController extends Controller
     $products = Product::where('status', 0)->where('product_tags_en',$tag)->orWhere('product_tags_hin',$tag)->orderBy('id', 'desc')->paginate(6);
 
     return view('frontend.product.tagwise_product', compact('products'));
-   }
+   }//End of TagwiseProduct
+
+   public function SubCateWiseProduct($sub_id, $slug){
+    $products = Product::where('status', 0)->where('sub_category_id',$sub_id)->orderBy('id', 'desc')->paginate(6);
+
+    return view('frontend.product.subcatewise_product', compact('products'));
+   }//End of SubCateWiseProduct
+
+   public function SubSubCateWiseProduct($sub_sub_id, $slug){
+    $products = Product::where('status', 0)->where('sub_sub_category_id',$sub_sub_id)->orderBy('id', 'desc')->paginate(6);
+
+    return view('frontend.product.subsubcatewise_product', compact('products'));
+
+   }//End of SubSubCateWiseProduct
+
+
 
 
 }
