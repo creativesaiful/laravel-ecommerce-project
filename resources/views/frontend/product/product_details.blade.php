@@ -114,10 +114,10 @@
                                             <div class="cart clearfix animate-effect">
                                                 <div class="action">
                                                     <div class="add-cart-button btn-group">
-                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                        <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal"  id="{{ $hot_deal->id }}" onclick="productView(this.id)"
                                                             type="button">
                                                             <i class="fa fa-shopping-cart"></i> </button>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                        <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal"  id="{{ $hot_deal->id }}" onclick="productView(this.id)">Add to
                                                             cart</button>
                                                     </div>
                                                 </div>
@@ -349,12 +349,16 @@
 
 
 
-                                        <div class="col-sm-6">
 
+
+
+
+                                            @if (count($product_color_en)>1)
+                                            <div class="col-sm-6">
                                             <div class="form-group">
 
                                                 <label class="info-title control-label">Choose Color <span> </span></label>
-                                                <select class="form-control"
+                                                <select class="form-control" id="color"
                                                    >
                                                     <option selected="" disabled="">--Choose Color--</option>
                                                     @foreach ($product_color_en as $color)
@@ -363,15 +367,18 @@
                                                 </select>
 
                                             </div> <!-- // end form group -->
-
                                         </div> <!-- // end col 6 -->
+                                            @endif
 
+
+
+                                        @if (count($product_size_en)>1)
                                         <div class="col-sm-6">
 
                                             <div class="form-group">
 
                                                 <label class="info-title control-label">Choose Size <span> </span></label>
-                                                <select class="form-control"
+                                                <select class="form-control" id="size"
                                                    >
                                                     <option selected="" disabled="">--Choose Size--</option>
                                                     @foreach ($product_size_en as $size)
@@ -383,6 +390,8 @@
 
 
                                         </div> <!-- // end col 6 -->
+                                        @endif
+
 
                                     </div><!-- /.row -->
 
@@ -400,24 +409,18 @@
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <div class="cart-quantity">
-                                                    <div class="quant-input">
-                                                        <div class="arrows">
-                                                            <div class="arrow plus gradient"><span
-                                                                    class="ir"><i
-                                                                        class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span
-                                                                    class="ir"><i
-                                                                        class="icon fa fa-sort-desc"></i></span></div>
-                                                        </div>
-                                                        <input type="text" value="1">
-                                                    </div>
+                                                <div class="form-group">
+
+                                                        <input type="number" class="form-control"  id="quantity" value="1" min="1">
+
                                                 </div>
                                             </div>
 
+                                            <input type="hidden" id="productId" value="{{$product->id}}">
+
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
-                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                                <button type="submit" class="btn btn-primary mb-2" id="AddToCart" onclick="addToCart()">Add
+                                                    to Cart</button>
                                             </div>
 
 

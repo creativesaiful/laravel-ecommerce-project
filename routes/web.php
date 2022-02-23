@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\frontend\LanguageController;
 
+use App\Http\Controllers\frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,3 +193,13 @@ Route::get('/product/subsubcategory/{sub_sub_id}/{slug}', [IndexController::clas
 
 // Product View Modal with Ajax
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+//Add to cart data store
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+
+//Mini Cart data
+Route::get('/cart/data/mini', [CartController::class, 'MiniCartData']);
+
+//Mini Cart data remove
+Route::get('/mini/data/remove/{rowID}', [CartController::class, 'MiniCartDataRemove']);
+

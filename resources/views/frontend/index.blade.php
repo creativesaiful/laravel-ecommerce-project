@@ -105,10 +105,10 @@
                                         <div class="cart clearfix animate-effect">
                                             <div class="action">
                                                 <div class="add-cart-button btn-group">
-                                                    <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                    <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal"  id="{{ $hot_deal->id }}" onclick="productView(this.id)"
                                                         type="button">
                                                         <i class="fa fa-shopping-cart"></i> </button>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to
+                                                    <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal"  id="{{ $hot_deal->id }}" onclick="productView(this.id)">Add to
                                                         cart</button>
                                                 </div>
                                             </div>
@@ -489,7 +489,7 @@
                                     title="Add Cart" data-toggle="modal" data-target="#exampleModal"  id="{{ $products->id }}" onclick="productView(this.id)"> <i
                                         class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn"
-                                    type="button">Add to cart</button>
+                                    type="button" >Add to cart</button>
                             </li>
                             <li class="lnk wishlist"> <a data-toggle="tooltip"
                                     class="add-to-cart" href="detail.html"
@@ -591,10 +591,10 @@
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            <button class="btn btn-primary icon"
-                                                                                data-toggle="dropdown" type="button"> <i
-                                                                                    class="fa fa-shopping-cart"></i>
-                                                                            </button>
+                                            <button class="btn btn-primary icon"
+                                            data-toggle="modal" data-target="#exampleModal"  id="{{ $cataWisePdt->id }}" onclick="productView(this.id)"> <i
+                                                    class="fa fa-shopping-cart" ></i>
+                                            </button>
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
@@ -743,9 +743,9 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                                type="button"> <i class="fa fa-shopping-cart"></i>
-                                                            </button>
+        <button type="button" class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal"  id="{{ $feature->id }}" onclick="productView(this.id)"
+            > <i class="fa fa-shopping-cart"></i>
+        </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to
                                                                 cart</button>
                                                         </li>
@@ -863,7 +863,7 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal"  id="{{ $feature->id }}" onclick="productView(this.id)"
                                                                 type="button"> <i class="fa fa-shopping-cart"></i>
                                                             </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to
@@ -982,7 +982,7 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal"  id="{{ $feature->id }}" onclick="productView(this.id)"
                                                                 type="button"> <i class="fa fa-shopping-cart"></i>
                                                             </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to
