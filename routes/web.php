@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\frontend\LanguageController;
 
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,3 +204,9 @@ Route::get('/cart/data/mini', [CartController::class, 'MiniCartData']);
 //Mini Cart data remove
 Route::get('/mini/data/remove/{rowID}', [CartController::class, 'MiniCartDataRemove']);
 
+//Wishlist data store
+Route::get('/wishlist/data/add/{id}', [WishlistController::class, 'AddToWishlist']);
+
+Route::get('/wishlist/view', [WishlistController::class, 'WishlistView'])->name('wishlist.view');
+
+Route::get('/wishlist/data/remove/{id}', [WishlistController::class, 'WishlistRemove']);

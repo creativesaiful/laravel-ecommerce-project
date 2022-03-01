@@ -409,6 +409,88 @@
         }
 
     </script>
+{{-- end mini cart function --}}
+
+{{-- Add Wish list --}}
+    <script>
+        function addWishList($id){
+            $.ajax({
+                type: "get",
+                url: "/wishlist/data/add/"+$id,
+                data: "data",
+                dataType: "json",
+                success: function (data) {
+
+                    // Start Message
+                    const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    icon: 'success',
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            // End Message
+                }
+            });
+        }
+    </script>
+
+
+{{-- End Add Wish list --}}
+
+{{-- Remove wish Start --}}
+
+<script>
+    function removeWish($id){
+        $.ajax({
+            type: "get",
+            url: "/wishlist/data/remove/"+$id,
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+                location.reload();
+                // Start Message
+                const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                icon: 'success',
+                                type: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                type: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
+            }
+        });
+    }
+</script>
+
 
 </body>
 

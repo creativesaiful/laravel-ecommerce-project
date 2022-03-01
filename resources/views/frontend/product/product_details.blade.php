@@ -327,7 +327,7 @@
 
                                             <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                                                    <a class="btn btn-primary" id="{{ $product->id }}" onclick="addWishList(this.id)"
                                                         title="Wishlist" href="#">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
@@ -710,11 +710,23 @@
 
                                                     </li>
 
-                                                    <li class="lnk wishlist">
+                                                    {{-- <li class="lnk wishlist">
                                                         <a class="add-to-cart" href="detail.html" title="Wishlist">
                                                             <i class="icon fa fa-heart"></i>
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
+                                                    <li class="add-cart-button btn-group">
+                                                        <button
+                                                        class="btn btn-primary icon" type="button"
+                                                        title="Add Wishlist" id="{{ $product->id }}" onclick="addWishList(this.id)"> <i
+                                                            class="icon fa fa-heart"></i>
+                                                     </button>
+
+
+                                      </li>
+
+
+                                                     </li>
 
                                                     <li class="lnk">
                                                         <a class="add-to-cart" href="detail.html" title="Compare">
