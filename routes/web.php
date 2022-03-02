@@ -17,6 +17,8 @@ use App\Http\Controllers\frontend\LanguageController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\WishlistController;
 
+use App\Http\Controllers\backend\CouponController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -229,3 +231,16 @@ Route::get('/wishlist/data/add/{id}', [WishlistController::class, 'AddToWishlist
 Route::get('/wishlist/view', [WishlistController::class, 'WishlistView'])->name('wishlist.view');
 
 Route::get('/wishlist/data/remove/{id}', [WishlistController::class, 'WishlistRemove']);
+
+
+//Coupon Code generate Route
+
+Route::prefix("coupon")->group(function(){
+    Route::get('manage', [CouponController::class, 'CouponView'])->name('manage.coupon');
+    Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
+    Route::get('/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit');
+Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+
+Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+});
+
