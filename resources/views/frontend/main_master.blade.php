@@ -383,6 +383,7 @@
                 dataType: "json",
                 success: function (data) {
                     miniCart();
+                    addToCartPage();
 
                     // Start Message
                     const Toast = Swal.mixin({
@@ -492,6 +493,98 @@
 </script>
 
 
+{{-- Remove wish End --}}
+
+{{-- Add to cart Page Data Showing Start --}}
+<script>
+    function addToCartPage(){
+        $.ajax({
+            type: "get",
+            url: "/cart/page/data",
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+
+                $tdata ='';
+                $.each(data.cart, function(key, value) {
+                   $tdata += ` <tr style="border: 1px solid #ddd;"> <td style="padding:0">
+                                 <img width="100px" src="/${value.options.image}" alt="">
+                                  </td>
+                                <td style="padding:0">${value.name}</td>
+                                <td style="padding:0">
+
+                                    ${value.options.color==null?'...':value.options.color }
+
+                                    </td>
+                                <td style="padding:0">
+                                    ${value.options.size==null?'...':value.options.size }
+                                    </td>
+                                <td style="padding:0">
+                                    <button type="button" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)"><i class="fa fa-minus"></i></button>
+                                   <span class="btn"> ${value.qty}</span>
+                                    <button type="button" class="btn btn-primary btn-sm" id="${value.rowId}" onclick="cartIncrement(this.id)" ><i class="fa fa-plus"></i></button>
+                                    </td>
+                                <td style="padding:0"><strong> ${value.subtotal} </strong></td>
+                                <td style="padding:0"> <button type="button" class="btn btn-danger" id="${value.rowId}" onclick="removeFromCartPage(this.id)"  > <i class="fa fa-times"> </i> </button> </td> </tr>`;
+                });
+
+
+                $('#cartPage').html($tdata);
+            }
+        });
+    }
+
+    addToCartPage();
+
+
+    //Remove cart from cart Page
+
+    function removeFromCartPage($rowId){
+        $.ajax({
+            type:"get",
+            url:"/remove/item/cart/"+$rowId,
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+
+                addToCartPage();
+                miniCart();
+            }
+        })
+    }
+
+// Cart Increment
+    function cartIncrement($rowId){
+        $.ajax({
+            type:"get",
+            url:"/cart/increment/"+$rowId,
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+                addToCartPage();
+                miniCart();
+            }
+        })
+    }
+
+    // Cart Decrement
+
+    function cartDecrement($rowId){
+        $.ajax({
+            type:"get",
+            url:"/cart/decrement/"+$rowId,
+            data: "data",
+            dataType: "json",
+            success: function (data) {
+                addToCartPage();
+                miniCart();
+            }
+        })
+    }
+</script>
+
+
 </body>
+
 
 </html>

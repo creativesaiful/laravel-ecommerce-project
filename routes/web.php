@@ -204,6 +204,25 @@ Route::get('/cart/data/mini', [CartController::class, 'MiniCartData']);
 //Mini Cart data remove
 Route::get('/mini/data/remove/{rowID}', [CartController::class, 'MiniCartDataRemove']);
 
+
+
+//Cart page view
+
+Route::get('/cart/page', [CartController::class, 'CartPageView'])->name('cart.page');
+
+Route::get('/cart/page/data', [CartController::class, 'CartPageData']);
+
+//Cart Item remove from cart page
+
+Route::get('/remove/item/cart/{id}',  [CartController::class, 'RemoveCartItemFromCartPage']);
+
+//Cart Item Increment from cart page
+
+Route::get('/cart/increment/{id}',  [CartController::class, 'CartIncrement']);
+//Cart Item Decrement from cart page
+Route::get('/cart/decrement/{id}',  [CartController::class, 'CartDecrement']);
+
+
 //Wishlist data store
 Route::get('/wishlist/data/add/{id}', [WishlistController::class, 'AddToWishlist']);
 

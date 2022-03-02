@@ -360,7 +360,7 @@
                                                 <label class="info-title control-label">Choose Color <span> </span></label>
                                                 <select class="form-control" id="color"
                                                    >
-                                                    <option selected="" disabled="">--Choose Color--</option>
+
                                                     @foreach ($product_color_en as $color)
                                                         <option value="{{ $color }}">{{ ucwords($color) }}</option>
                                                     @endforeach
@@ -380,7 +380,7 @@
                                                 <label class="info-title control-label">Choose Size <span> </span></label>
                                                 <select class="form-control" id="size"
                                                    >
-                                                    <option selected="" disabled="">--Choose Size--</option>
+
                                                     @foreach ($product_size_en as $size)
                                                         <option value="{{ $size }}">{{ ucwords($size) }}</option>
                                                     @endforeach
