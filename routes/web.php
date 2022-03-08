@@ -18,6 +18,7 @@ use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\WishlistController;
 
 use App\Http\Controllers\backend\CouponController;
+use App\Http\Controllers\backend\ShippingAreaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,9 @@ use App\Http\Controllers\backend\CouponController;
 
 
 
-Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
-	Route::get('/login', [AdminController::class, 'loginForm']);
-	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
+Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
+    Route::get('/login', [AdminController::class, 'loginForm']);
+    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 
@@ -49,14 +50,14 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', f
 
 //admin route
 
-Route::get('admin/logout',[AdminController::class, 'destroy'])->name('admin.logout');
-Route::get('admin/profile',[AdminProfileController::class, 'viewAdminProfile'])->name('admin.profile');
+Route::get('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+Route::get('admin/profile', [AdminProfileController::class, 'viewAdminProfile'])->name('admin.profile');
 
 
-Route::get('admin/edit_profile',[AdminProfileController::class, 'editAdminProfile'])->name('admin.edit_profile');
+Route::get('admin/edit_profile', [AdminProfileController::class, 'editAdminProfile'])->name('admin.edit_profile');
 
 
-Route::post('admin/store_profile',[AdminProfileController::class, 'storeAdminProfile'])->name('admin.store_profile');
+Route::post('admin/store_profile', [AdminProfileController::class, 'storeAdminProfile'])->name('admin.store_profile');
 
 
 
@@ -67,7 +68,7 @@ Route::post('admin/store_profile',[AdminProfileController::class, 'storeAdminPro
 
 // Brands Related all Route
 
-Route::prefix('brand')->group(function(){
+Route::prefix('brand')->group(function () {
     Route::get('view', [brandContrller::class, 'ViewAllBrand'])->name('brand.view');
     Route::post('store', [brandContrller::class, 'BrandSotre'])->name('brand.store');
     Route::get('edit/{id}', [brandContrller::class, 'BrandEdit'])->name('brand.edit');
@@ -77,7 +78,7 @@ Route::prefix('brand')->group(function(){
 
 //catagory route
 
-Route::prefix('catagory')->group(function(){
+Route::prefix('catagory')->group(function () {
     Route::get('view', [catagoryController::class, 'ViewAllCata'])->name('catagory.view');
     Route::post('store', [catagoryController::class, 'SotreCata'])->name('catagory.store');
     Route::get('edit/{id}', [catagoryController::class, 'EditCata'])->name('catagory.edit');
@@ -87,7 +88,7 @@ Route::prefix('catagory')->group(function(){
 
 //Sub catagory Route
 
-Route::prefix('subcata')->group(function(){
+Route::prefix('subcata')->group(function () {
     Route::get('view', [subCataController::class, 'ViewAllSubcata'])->name('subcata.view');
     Route::post('store', [subCataController::class, 'SotreSubcata'])->name('subcata.store');
     Route::get('edit/{id}', [subCataController::class, 'EditSubcata'])->name('subcata.edit');
@@ -96,7 +97,7 @@ Route::prefix('subcata')->group(function(){
 });
 
 //Sub sub category
-Route::prefix('subsubcata')->group(function(){
+Route::prefix('subsubcata')->group(function () {
     Route::get('view', [subsubcateController::class, 'ViewAllSubsubcate'])->name('subsubcata.view');
     Route::post('store', [subsubcateController::class, 'SotreSubsubcate'])->name('subsubcata.store');
     Route::get('edit/{id}', [subsubcateController::class, 'EditSubsubcate'])->name('subsubcata.edit');
@@ -110,24 +111,24 @@ Route::prefix('subsubcata')->group(function(){
 
 //Product Route Backend
 
-Route::prefix('product')->group(function(){
+Route::prefix('product')->group(function () {
 
 
-    route::get('create',[ProductController::class, 'ProductCreate'])->name('product.create');
-    route::post('store',[ProductController::class, 'ProductStore'])->name('product.store');
+    route::get('create', [ProductController::class, 'ProductCreate'])->name('product.create');
+    route::post('store', [ProductController::class, 'ProductStore'])->name('product.store');
 
-    route::get('view',[ProductController::class, 'ProductView'])->name('product.view');
+    route::get('view', [ProductController::class, 'ProductView'])->name('product.view');
 
-    route::get('edit/{id}',[ProductController::class, 'ProductEdit'])->name('product.edit');
-    route::post('update/{id}',[ProductController::class, 'ProductUpdate'])->name('product.update');
+    route::get('edit/{id}', [ProductController::class, 'ProductEdit'])->name('product.edit');
+    route::post('update/{id}', [ProductController::class, 'ProductUpdate'])->name('product.update');
 
-    route::post('change/image/',[ProductController::class, 'ProductImgUpdate'])->name('image.update');
-    route::get('remove/image/{id}',[ProductController::class, 'ProductImgRemove'])->name('image.remove');
+    route::post('change/image/', [ProductController::class, 'ProductImgUpdate'])->name('image.update');
+    route::get('remove/image/{id}', [ProductController::class, 'ProductImgRemove'])->name('image.remove');
 
-    route::get('inactive/{id}',[ProductController::class, 'productInactive'])->name('product.inactive');
-    route::get('active/{id}',[ProductController::class, 'productActive'])->name('product.active');
+    route::get('inactive/{id}', [ProductController::class, 'productInactive'])->name('product.inactive');
+    route::get('active/{id}', [ProductController::class, 'productActive'])->name('product.active');
 
-    route::get('delete/{id}',[ProductController::class, 'ProductDelete'])->name('product.delete');
+    route::get('delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
 
 
     // Ajax sub Category
@@ -139,15 +140,15 @@ Route::prefix('product')->group(function(){
 });
 
 
-Route::prefix('slider')->group(function(){
-    Route::get('view', [sliderController::class, 'SliderView' ])->name('slider.view');
-    Route::post('store', [sliderController::class, 'SliderStore' ])->name('slider.store');
-    Route::get('edit/{id}', [sliderController::class, 'SliderEdit' ])->name('slider.edit');
-    Route::post('update/{id}', [sliderController::class, 'SliderUpdate' ])->name('slider.update');
-    Route::get('delete/{id}', [sliderController::class, 'SliderDelete' ])->name('slider.delete');
+Route::prefix('slider')->group(function () {
+    Route::get('view', [sliderController::class, 'SliderView'])->name('slider.view');
+    Route::post('store', [sliderController::class, 'SliderStore'])->name('slider.store');
+    Route::get('edit/{id}', [sliderController::class, 'SliderEdit'])->name('slider.edit');
+    Route::post('update/{id}', [sliderController::class, 'SliderUpdate'])->name('slider.update');
+    Route::get('delete/{id}', [sliderController::class, 'SliderDelete'])->name('slider.delete');
 
-    Route::get('active/{id}', [sliderController::class, 'SlideActive' ])->name('slider.active');
-    Route::get('inactive/{id}', [sliderController::class, 'SlideInActive' ])->name('slider.inactive');
+    Route::get('active/{id}', [sliderController::class, 'SlideActive'])->name('slider.active');
+    Route::get('inactive/{id}', [sliderController::class, 'SlideInActive'])->name('slider.inactive');
 });
 
 
@@ -235,12 +236,51 @@ Route::get('/wishlist/data/remove/{id}', [WishlistController::class, 'WishlistRe
 
 //Coupon Code generate Route
 
-Route::prefix("coupon")->group(function(){
+Route::prefix("coupon")->group(function () {
     Route::get('manage', [CouponController::class, 'CouponView'])->name('manage.coupon');
     Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
     Route::get('/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit');
-Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+    Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
 
-Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+    Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
 });
 
+
+
+// Admin Shipping All Routes
+
+Route::prefix('shipping')->group(function () {
+
+    Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('manage-division');
+
+    Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
+
+    Route::get('/division/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
+
+    Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
+
+    Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
+
+
+    // Ship District
+    Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage-district');
+
+    Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
+
+    Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
+
+    Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
+
+    Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+
+    // Ship State
+Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
+
+Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
+
+Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
+
+Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
+
+Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
+});

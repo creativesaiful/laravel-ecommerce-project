@@ -114,6 +114,31 @@
             <li class="treeview">
                 <a href="#">
                     <i data-feather="file"></i>
+                    <span>Shipping</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{$route == 'manage-division' ? 'active' :''}}" ><a href="{{route('manage-division')}}"><i class="ti-more"></i> Division Manage</a></li>
+
+
+                    <li class="{{$route == 'manage-district' ? 'active' :''}}" ><a href="{{route('manage-district')}}"><i class="ti-more"></i> District Manage</a></li>
+
+                    <li class="{{$route == 'manage-state' ? 'active' :''}}" ><a href="{{route('manage-state')}}"><i class="ti-more"></i> State Manage</a></li>
+
+
+
+
+
+
+
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="file"></i>
                     <span>Slider</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
