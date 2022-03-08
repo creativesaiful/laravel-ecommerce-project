@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
+use App\Models\ShipDivision;
 class CartController extends Controller
 {
     public function AddToCart(Request $request, $id)
@@ -82,8 +85,9 @@ class CartController extends Controller
         $cart = Cart::content();
         $cart_count = Cart::count();
         $cart_total = Cart::total();
+        $sub_total = Cart::subtotal();
 
-        return response()->json(['cart'=>$cart,'cart_count'=>$cart_count,'cart_total'=>$cart_total]);
+        return response()->json(['cart'=>$cart,'cart_count'=>$cart_count,'cart_total'=>$cart_total, 'sub_total'=>$sub_total]);
     }//end of CartPageData
 
 
@@ -99,6 +103,25 @@ class CartController extends Controller
        $row =  Cart::get($rowId);
 
         Cart::update($rowId, $row->qty+1);
+        if (Session::has('coupon')) {
+
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+            $total = (int)str_replace(',','',Cart::total());
+
+           Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round($total * $coupon->coupon_discount/100),
+                'total_amount' => round($total- $total * $coupon->coupon_discount/100)
+            ]);
+            return response()->json('decremented');
+        }else{
+            return response()->json('decremented');
+        }
+
+
+
         return response()->json('incremented');
     }//end of Cart Increment
 
@@ -108,12 +131,129 @@ class CartController extends Controller
 
         if($row->qty>1){
             Cart::update($rowId, $row->qty-1);
-            return response()->json('decremented');
+
+            if (Session::has('coupon')) {
+
+                $coupon_name = Session::get('coupon')['coupon_name'];
+                $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+                $total = (int)str_replace(',','',Cart::total());
+
+               Session::put('coupon',[
+                    'coupon_name' => $coupon->coupon_name,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'discount_amount' => round($total * $coupon->coupon_discount/100),
+                    'total_amount' => round($total- $total * $coupon->coupon_discount/100)
+                ]);
+                return response()->json('decremented');
+            }else{
+                return response()->json('decremented');
+            }
+
+
 
         }else{
             return response()->json(['error'=>'Minimum quantity is 1']);
         }
     }//end of Cart Decrement
+
+
+
+
+    public function CouponApply(Request $request){
+
+        $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
+        if ($coupon) {
+
+
+       $total = (int)str_replace(',','',Cart::total());
+
+            Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round($total * $coupon->coupon_discount/100),
+                'total_amount' => round($total - $total * $coupon->coupon_discount/100)
+            ]);
+
+            return response()->json(array(
+                'validity' => true,
+                'success' => 'Coupon Applied Successfully'
+            ));
+
+        }else{
+            return response()->json(['error' => 'Invalid Coupon']);
+        }
+
+    } // end method
+
+
+    public function CouponCalculation(){
+
+
+
+        if (Session::has('coupon')) {
+            return response()->json(array(
+                'subtotal' => Cart::total(),
+                'coupon_name' => session()->get('coupon')['coupon_name'],
+                'coupon_discount' => session()->get('coupon')['coupon_discount'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        }else{
+            return response()->json(array(
+                'total' => Cart::total(),
+            ));
+
+        }
+    } // end method
+
+
+ // Remove Coupon
+    public function CouponRemove(){
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon Remove Successfully']);
+    }
+
+
+
+ // Checkout Method
+    public function CheckoutCreate(){
+
+        if (Auth::check()) {
+            if (Cart::total() > 0) {
+
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        $divisions = ShipDivision::orderBy('division_name','ASC')->get();
+        return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
+
+            }else{
+
+            $notification = array(
+            'message' => 'Shopping At list One Product',
+            'type' => 'error'
+        );
+
+        return redirect()->to('/')->with($notification);
+
+            }
+
+
+        }else{
+
+             $notification = array(
+            'message' => 'You Need to Login First',
+            'alert-type' => 'error'
+        );
+
+        return redirect()->route('login')->with($notification);
+
+        }
+
+    } // end method
+
+
 
 
 }

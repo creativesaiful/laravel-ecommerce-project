@@ -243,6 +243,7 @@ Route::prefix("coupon")->group(function () {
     Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
 
     Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+
 });
 
 
@@ -284,3 +285,11 @@ Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate']
 
 Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
 });
+
+
+//Coupon Code Applu Route
+
+Route::post('coupon-apply', [CartController::class, 'couponApply']);
+
+Route::get('coupon-calculation', [CartController::class, 'CouponCalculation']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
