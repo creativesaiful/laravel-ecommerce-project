@@ -19,6 +19,8 @@ use App\Http\Controllers\WishlistController;
 
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\backend\ShippingAreaController;
+use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -293,3 +295,19 @@ Route::post('coupon-apply', [CartController::class, 'couponApply']);
 
 Route::get('coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
+ // Checkout Routes
+
+ Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+
+ //Division Ajax Route
+ Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+//district Ajax Route
+Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
+
+//checkout store
+Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');

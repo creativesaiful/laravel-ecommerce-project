@@ -244,7 +244,7 @@ class CartController extends Controller
 
              $notification = array(
             'message' => 'You Need to Login First',
-            'alert-type' => 'error'
+            'type' => 'error'
         );
 
         return redirect()->route('login')->with($notification);

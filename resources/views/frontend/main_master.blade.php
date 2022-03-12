@@ -34,6 +34,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
         rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+{{-- Stripe script --}}
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body class="cnt-home">
@@ -194,6 +196,30 @@
         </div>
     </div>
     <!-- End Add to Cart Product Modal -->
+
+    <script>
+        @if (Session::has('message'))
+
+            var type = ("{{ Session::get('type') }}");
+
+            var message = ("{{ Session::get('message') }}");
+            switch (type) {
+            case 'success':
+            toastr.success(message);
+            break;
+            case 'warning':
+            toastr.warning(message);
+            break;
+            case 'error':
+            toastr.error(message);
+            break;
+            case 'info':
+            toastr.info(message);
+            break;
+            }
+
+        @endif
+    </script>
 
     <script type="text/javascript">
         $.ajaxSetup({
