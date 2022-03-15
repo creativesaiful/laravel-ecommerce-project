@@ -24,6 +24,9 @@ use App\Http\Controllers\frontend\CashController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\StripeController;
 use App\Models\Order;
+use Laravel\Jetstream\Rules\Role;
+
+use App\Http\Controllers\backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -292,7 +295,7 @@ Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])
 });
 
 
-//Coupon Code Applu Route
+//Coupon Code Applly Route
 
 Route::post('coupon-apply', [CartController::class, 'couponApply']);
 
@@ -316,7 +319,7 @@ Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->na
 Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
 
 
-// Order
+// Order frontend v
 Route::get('/my/orders', [AllUserControlle::class, 'MyOrders'])->name('my.orders');
 Route::get('/order_details/{order_id}', [AllUserControlle::class, 'OrderDetails']);
 
@@ -325,3 +328,36 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 
 //Invoice genereate
 Route::get('/invoice_download/{order_id}', [AllUserControlle::class, 'InvoiceDownload']);
+
+
+
+// Backend Order management Rourtes
+
+Route::prefix('order')->group(function(){
+    route::get('/pending', [OrderController::class, 'PendingOrders'])->name('order.pending');
+    Route::get('/pending-orders/details/{order_id}', [OrderController::class, 'PendingOrdersDetails'])->name('pending.order.details');
+
+
+    Route::get('/confirmed/orders', [OrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
+
+    Route::get('/processing/orders', [OrderController::class, 'ProcessingOrders'])->name('processing-orders');
+
+    Route::get('/picked/orders', [OrderController::class, 'PickedOrders'])->name('picked-orders');
+
+    Route::get('/shipped/orders', [OrderController::class, 'ShippedOrders'])->name('shipped-orders');
+
+    Route::get('/delivered/orders', [OrderController::class, 'DeliveredOrders'])->name('delivered-orders');
+
+    Route::get('/cancel/orders', [OrderController::class, 'CancelOrders'])->name('cancel-orders');
+    Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm');
+
+    Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
+
+Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
+
+Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked.shipped');
+
+Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
+
+Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+});

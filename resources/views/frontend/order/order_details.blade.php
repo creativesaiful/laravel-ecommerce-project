@@ -228,7 +228,18 @@
 
   </div> <!-- // END ORDER ITEM ROW -->
 
+  @if($order->status !== "delivered")
 
+      @else
+
+
+
+  <div class="form-group">
+    <label for="label"> Order Return Reason:</label>
+    <textarea name="return_reason" id="" class="form-control" cols="30" rows="05">Return Reason</textarea>
+
+  </div>
+  @endif
 
 
 
