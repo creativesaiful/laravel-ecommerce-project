@@ -19,8 +19,11 @@ use App\Http\Controllers\WishlistController;
 
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\backend\ShippingAreaController;
+use App\Http\Controllers\frontend\AllUserControlle;
+use App\Http\Controllers\frontend\CashController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\StripeController;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -311,3 +314,14 @@ Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGe
 Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
 Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+
+// Order
+Route::get('/my/orders', [AllUserControlle::class, 'MyOrders'])->name('my.orders');
+Route::get('/order_details/{order_id}', [AllUserControlle::class, 'OrderDetails']);
+
+//Cash on Delivery
+Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
+//Invoice genereate
+Route::get('/invoice_download/{order_id}', [AllUserControlle::class, 'InvoiceDownload']);
