@@ -251,7 +251,6 @@ Route::prefix("coupon")->group(function () {
     Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
 
     Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
-
 });
 
 
@@ -283,15 +282,15 @@ Route::prefix('shipping')->group(function () {
     Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
 
     // Ship State
-Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
+    Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
 
-Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
+    Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
 
-Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
+    Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
 
-Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
+    Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
 
-Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
+    Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
 });
 
 
@@ -303,13 +302,13 @@ Route::get('coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
 
- // Checkout Routes
+// Checkout Routes
 
- Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 
 
- //Division Ajax Route
- Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+//Division Ajax Route
+Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
 //district Ajax Route
 Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
 
@@ -326,6 +325,12 @@ Route::get('/order_details/{order_id}', [AllUserControlle::class, 'OrderDetails'
 //Cash on Delivery
 Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
+//Order return frontend
+Route::post('/return/order/{order_id}', [AllUserControlle::class, 'ReturnOrder'])->name('return.order');
+
+Route::get('/return/order/list', [AllUserControlle::class, 'ReturnOrderList'])->name('return.order.list');
+Route::get('/cancel/orders', [AllUserControlle::class, 'CancelOrders'])->name('cancel.orders');
+
 //Invoice genereate
 Route::get('/invoice_download/{order_id}', [AllUserControlle::class, 'InvoiceDownload']);
 
@@ -333,7 +338,7 @@ Route::get('/invoice_download/{order_id}', [AllUserControlle::class, 'InvoiceDow
 
 // Backend Order management Rourtes
 
-Route::prefix('order')->group(function(){
+Route::prefix('order')->group(function () {
     route::get('/pending', [OrderController::class, 'PendingOrders'])->name('order.pending');
     Route::get('/pending-orders/details/{order_id}', [OrderController::class, 'PendingOrdersDetails'])->name('pending.order.details');
 
@@ -353,11 +358,11 @@ Route::prefix('order')->group(function(){
 
     Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
 
-Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
+    Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
 
-Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked.shipped');
+    Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked.shipped');
 
-Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
+    Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
 
-Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+    Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
 });

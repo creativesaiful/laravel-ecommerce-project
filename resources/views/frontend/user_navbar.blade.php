@@ -4,18 +4,22 @@
         style="width: 150px; height:150px; border-radius:50%" alt="">
 
     <br> <br>
-    <a href="{{ route('dashboard') }}" class="btn btn-success">Home</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary">Home</a>
 
     <br> <br>
-    <a href="{{ route('my.orders') }}" class="btn btn-success">Order</a>
+    <a href="{{ route('my.orders') }}" class="btn btn-primary">My Orders</a>
+    <br> <br>
+    <a href="{{ route('return.order.list') }}" class="btn btn-primary">Return Orders</a>
+    <br> <br>
+    <a href="{{ route('cancel.orders') }}" class="btn btn-primary">Cancel Orders</a>
 
 
     <br><br>
-    <a href="{{ route('user.edit') }}" class="btn btn-success">Update Profile</a>
+    <a href="{{ route('user.edit') }}" class="btn btn-primary">Update Profile</a>
 
 
     <br><br>
-    <a href="{{ route('user.change_passwrod') }}" class="btn btn-success">Change Password</a>
+    <a href="{{ route('user.change_passwrod') }}" class="btn btn-primary">Change Password</a>
 
     <br><br>
 
