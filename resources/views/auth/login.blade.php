@@ -21,27 +21,24 @@
                     <div class="col-md-6 col-sm-6 sign-in">
                         <h4 class="">Sign in</h4>
                         <p class="">Hello, Welcome to your account.</p>
-                        <div class="social-sign-in outer-top-xs">
-                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-                            <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
-                        </div>
+
                         <form method="POST" action="{{ isset($guard) ? url($guard . '/login') : route('login') }}"
                             class="outer-top-xs">
                             @csrf
 
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
+                                <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span>(user@gmail.com) </label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"
-                                    id="email" value="{{ old('email') }}">
+                                    id="email" value="{{ old('email') }}" >
 
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
+                                <label class="info-title" for="exampleInputPassword1">Password <span>*</span> (123)</label>
                                 <input type="password" name="password" id="password"
-                                    class="form-control unicase-form-control text-input">
+                                    class="form-control unicase-form-control text-input" >
 
                                 @error('password')
                                     <div class="text-danger">{{ $message }}</div>

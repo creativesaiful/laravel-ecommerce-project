@@ -12,7 +12,7 @@
 
                         <li><a href="#"><i class="icon fa fa-user"></i>
                                 @if (session()->get('language') == 'hindi')
-                                मेरी प्रोफाइल @else My Account
+                                मेरी प्रोफाइल @else English
                                 @endif
                             </a></li>
 

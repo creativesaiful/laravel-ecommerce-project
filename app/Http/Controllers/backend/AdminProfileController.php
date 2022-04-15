@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -48,16 +49,14 @@ class AdminProfileController extends Controller
 
         $dbresponse = $adminData->save();
 
-
-
-
-
-
-
         return redirect()->route('admin.profile')->with(['message'=>'Profile Updated successfully', 'type'=>'success']);
 
 
+    }//End of storeAdminProfile
 
+    public function AllUsers(){
+		$users = User::latest()->get();
+		return view('backend.user.all_user',compact('users'));
+	}
 
-    }
 }

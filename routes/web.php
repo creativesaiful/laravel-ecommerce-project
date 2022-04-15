@@ -368,15 +368,21 @@ Route::prefix('order')->group(function () {
     Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
 });
 
-
-Route::prefix('reports')->group(function(){
+//Backend Report generation
+Route::prefix('reports')->group(function () {
 
     Route::get('/view', [ReportController::class, 'ReportView'])->name('all-reports');
     Route::post('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
 
-Route::post('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
+    Route::post('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
 
-Route::post('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
+    Route::post('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
+});
+
+// Admin Get All User Routes
+Route::prefix('alluser')->group(function(){
+
+    Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
 
 
     });
